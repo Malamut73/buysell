@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BUYSELL</title>
+</head>
+<body>
+<h1>BUYSELL</h1><hr>
+<h4>Товары со всей России</h4>
+<tr th:each="product : ${products}">
+    <div>
+        <b><td th:text="${product.title}"></td></b>
+        <td th:text="${product.price} + ' руб.'"></td>
+        <td><a th:href="'/product/' + ${product.id}">Подробнее</a></td>
+        <br><br>
+    </div>
+</tr>
+<hr>
+<h3>Создать новый товар</h3>
+<form th:method="POST" th:action="@{/product/create}" >
+    Название объявления:<input type="text" name="title"><br><br>
+    Описание объявления:<input type="text" name="description"><br><br>
+    Цена:<input type="number" name="price"><br><br>
+    Город:<input type="text" name="city"><br><br>
+    Имя:<input type="text" name="author"><br><br>
+    <input type="submit" value="Добавить товар"><br><br>
+<!--    <button type="submit">Добавить товар</button>-->
+</form>
+
+
+</body>
+</html>
