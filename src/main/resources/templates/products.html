@@ -7,14 +7,26 @@
 <body>
 <h1>BUYSELL</h1><hr>
 <h4>Товары со всей России</h4>
-<tr th:each="product : ${products}">
-    <div>
-        <b><td th:text="${product.title}"></td></b>
-        <td th:text="${product.price} + ' руб.'"></td>
-        <td><a th:href="'/product/' + ${product.id}">Подробнее</a></td>
-        <br><br>
-    </div>
-</tr>
+<form th:action="@{/}" th:method="get">
+    Поиск по названию: <input type="text" name="title"><br>
+    <input type="submit" value="Поиск">
+</form>
+<br><br>
+
+<div th:if="!${#lists.isEmpty(products)}">
+    <tr th:each="product : ${products}">
+        <div>
+            <b><td th:text="${product.title}"></td></b>
+            <td th:text="${product.price} + ' руб.'"></td>
+            <td><a th:href="'/product/' + ${product.id}">Подробнее</a></td>
+            <br><br>
+        </div>
+    </tr>
+</div>
+<div th:if="${#lists.isEmpty(products)}">
+    <h3>Товаров нет</h3>
+</div>
+
 <hr>
 <h3>Создать новый товар</h3>
 <form th:method="POST" th:action="@{/product/create}" >
@@ -24,7 +36,6 @@
     Город:<input type="text" name="city"><br><br>
     Имя:<input type="text" name="author"><br><br>
     <input type="submit" value="Добавить товар"><br><br>
-<!--    <button type="submit">Добавить товар</button>-->
 </form>
 
 
