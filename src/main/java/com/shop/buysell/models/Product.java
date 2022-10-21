@@ -1,16 +1,19 @@
 package com.shop.buysell.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
-@Data
+//@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 public class Product {
 
     @Id
@@ -32,4 +35,24 @@ public class Product {
 
     @Column(name = "author")
     private String author;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
+    mappedBy = "product")
+    private List<Image> images = new ArrayList<>();;
+
+    @Column(name = "previewImageId")
+    private Long previewImageId;
+
+    @Column(name = "dateOfCreated")
+    private LocalDateTime dateOfCreated;
+
+    @PrePersist
+    private void init(){
+        dateOfCreated = LocalDateTime.now();
+    }
+
+    public void addImageToProduct(Image image){
+        image.setProduct(this);
+        images.add(image);
+    }
 }

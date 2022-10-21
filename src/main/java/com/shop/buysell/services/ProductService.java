@@ -1,11 +1,14 @@
 package com.shop.buysell.services;
 
+import com.shop.buysell.models.Image;
 import com.shop.buysell.models.Product;
 import com.shop.buysell.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +24,40 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void saveProduct(Product product){
-        log.info("Saving new{}", product);
+    public void saveProduct(Product product, MultipartFile file1,
+                            MultipartFile file2,
+                            MultipartFile file3) throws IOException {
+        Image image1;
+        Image image2;
+        Image image3;
+        if(file1.getSize() !=0){
+            image1 = toImageEntity(file1);
+            image1.setPreviewImage(true);
+            product.addImageToProduct(image1);
+        }
+        if(file2.getSize() !=0){
+            image2 = toImageEntity(file2);
+            product.addImageToProduct(image2);
+        }
+        if(file3.getSize() !=0){
+            image3 = toImageEntity(file3);
+            product.addImageToProduct(image3);
+        }
+        log.info("Saving new Product. Title: {}; Author: {}", product.getTitle(), product.getAuthor());
+        Product productFromDb = productRepository.save(product);
+        productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
         productRepository.save(product);
+    }
+
+    private Image toImageEntity(MultipartFile file1) throws IOException {
+        Image image = Image.builder()
+                .name(file1.getName())
+                .originalFileName(file1.getOriginalFilename())
+                .contentType(file1.getContentType())
+                .size(file1.getSize())
+                .bytes(file1.getBytes())
+                .build();
+        return image;
     }
 
     public void deleteProduct(Long id){
@@ -32,6 +66,6 @@ public class ProductService {
 
     public Product getProductById(Long id) {
 
-        return productRepository.findById(id).orElse(null);
+        return productRepository.getReferenceById(id);
     }
 }

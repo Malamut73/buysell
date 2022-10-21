@@ -7,6 +7,9 @@
 <body>
 <h1>BUYSELL</h1><hr>
 <h4>Подробная информация о товаре</h4>
+<tr th:each="image : ${product.images}">
+    <img th:src="'/images/' + ${image.id}" height="60px"><br><br>
+</tr>
 <b>Название товара: </b><td th:text="${product.title}"></td><br>
 <b>Описание товара: </b><td th:text="${product.description}"></td><br>
 <b>Цена: </b><td th:text="${product.price}"></td><br>
