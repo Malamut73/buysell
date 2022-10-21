@@ -9,11 +9,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
-//@Data
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+//@Setter
+//@Getter
 public class Product {
 
     @Id

@@ -6,12 +6,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "images")
-//@Data
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Setter
-@Getter
+//@Setter
+//@Getter
 public class Image {
 
     @Id
