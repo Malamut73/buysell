@@ -2,19 +2,23 @@ package com.shop.buysell.models;
 
 
 import com.shop.buysell.models.enums.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -47,9 +51,16 @@ public class User implements UserDetails {
     private Set<Role> roles = new HashSet<>();
     private LocalDateTime dateOfCreated;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Product> products = new ArrayList<>();
+
     @PrePersist
     private void init(){
         dateOfCreated = LocalDateTime.now();
+    }
+
+    public boolean isAdmin(){
+        return roles.contains(Role.ROLE_ADMIN);
     }
 
     @Override
@@ -77,4 +88,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return active;
     }
+
+
+
 }

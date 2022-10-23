@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BUYSELL</title>
+</head>
+<body>
+<h1>BUYSELL</h1><hr>
+
+<h3>Информация о пользователе <td th:text="${user.name}"></td></h3>
+<b>Номер телефона: <td th:text="${user.phoneNumber}"></td></b><br>
+<b>Элктронная почта: <td th:text="${user.email}"></td></b><br>
+<hr>
+<h4>Твары пользователя </h4>
+<tr th:each="product : ${user.products}">
+    <div>
+        <b><td th:text="${product.title}"></td></b>
+        <td th:text="${product.price} + ' руб.'"></td>
+        <td><a th:href="'/product/' + ${product.id}">Подробнее</a></td>
+        <br><br>
+    </div>
+</tr>
+<div th:if="${#lists.isEmpty(user.products)}">
+    <h3>Товаров нет</h3>
+</div>
+
+
+
+</body>
+</html>

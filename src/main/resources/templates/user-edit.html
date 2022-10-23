@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BUYSELL</title>
+</head>
+<body>
+<h1>BUYSELL</h1><hr>
+<h3>Редактирование пользователя <td th:text="${user.name}"></td></h3>
+<form th:action="@{/admin/edit}" th:method="post">
+    <input type="hidden" name="id" th:value="${user.id}">
+    <input type="text" name="email" th:value="${user.email}">
+    <input type="text" name="phoneNumber" th:value="${user.phoneNumber}">
+    <input type="text" name="name" th:value="${user.name}">
+    <input type="text" name="active" th:value="${user.active}">
+    <input type="hidden" name="password" th:value="${user.password}">
+    <input type="hidden" name="dateOfCreated" th:value="${user.dateOfCreated}">
+
+    <div th:each="role : ${roles}">
+        <input th:id="${role}" type="checkbox" th:name="roles[]" th:value="${role}" th:checked="${#lists.contains(user.roles, role)}" />
+        <label th:text="${role}" /></label>
+    </div>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

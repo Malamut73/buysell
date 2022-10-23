@@ -33,9 +33,6 @@ public class Product {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "author")
-    private String author;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
     mappedBy = "product")
     private List<Image> images = new ArrayList<>();;
@@ -46,6 +43,10 @@ public class Product {
     @Column(name = "dateOfCreated")
     private LocalDateTime dateOfCreated;
 
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn
+    private User user;
+
     @PrePersist
     private void init(){
         dateOfCreated = LocalDateTime.now();
@@ -55,4 +56,6 @@ public class Product {
         image.setProduct(this);
         images.add(image);
     }
+
+
 }
