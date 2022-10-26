@@ -20,7 +20,7 @@
         </form>
     </td>
 
-    <td sec:authorize="hasAuthority('ROLE_USER')">
+    <td sec:authorize="hasAuthority('ROLE_ADMIN')">
         <a th:href="@{/admin}">Панель администратора</a>
     </td>
 

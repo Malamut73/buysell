@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-@PreAuthorize("hasAuthority('ROLE_USER')")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminController {
 
     private final UserService userService;
@@ -42,7 +42,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/edit")
-    public String userEdit(@RequestParam("id") User user,
+    public String userEdit(User user,
                            @RequestParam(name="roles[]", required = false) String[] roles){
         System.out.println(user.getPhoneNumber());
         user.getRoles().clear();

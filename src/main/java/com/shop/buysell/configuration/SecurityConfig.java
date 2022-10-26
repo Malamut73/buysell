@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                     .authorizeRequests()
-                    .antMatchers("/", "/product/**", "/images/**", "/registration", "/user/**")
+                    .antMatchers("/", "/product/**", "/images/**", "/registration", "/user/**", "/activate/*")
                     .permitAll()
                     .anyRequest().authenticated()
                 .and()
