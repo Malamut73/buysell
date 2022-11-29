@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml ">
 <head>
     <meta charset="UTF-8">
     <title>BUYSELL</title>
+    <link rel="stylesheet" type="text/css" href="/styles/css/style.css">
+
+
 </head>
 <body>
 
-<h1>BUYSELL</h1>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
 
 <hr>
     <td sec:authorize="isAuthenticated()">
-
         <h3>
             Имя пользователя:
             <span sec:authentication="principal.username">Bill</span>

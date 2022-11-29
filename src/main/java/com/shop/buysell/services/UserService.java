@@ -41,9 +41,12 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         String message = String.format(
+//                "Hello, %s! \n" +
+//                        "Welcome to Sweater. Please visit next link: " +
+//                        "http://localhost:8080/activate/%s",
                 "Hello, %s! \n" +
                         "Welcome to Sweater. Please visit next link: " +
-                        "http://localhost:8080/activate/%s",
+                        "http://ul-portal.ru/activate/%s",
                 user.getUsername(),
                 user.getActivationCode()
         );

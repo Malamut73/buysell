@@ -13,8 +13,4 @@ public class BuysellApplication {
 		SpringApplication.run(BuysellApplication.class, args);
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder(8);
-	}
 }
