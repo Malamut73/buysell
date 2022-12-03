@@ -1,5 +1,5 @@
 <!DOCTYPE html >
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -11,10 +11,11 @@
     <div id="nav-menu" class="header">
         <div class="header__section">
             <div class="header__item headerLogo">
-                Ul-Portal
+                <a href="/">Ul-Portal</a>
+
             </div>
             <div class="header__item">
-                <a href="#">Маркет</a>
+                <a href="/shop">Маркет</a>
             </div>
             <div class="header__item headerButton">
                 <a href="#">Форум</a>
@@ -26,9 +27,19 @@
                 <a href="#">Бизнес</a>
             </div>
         </div>
-        <div class="header__section">
+        <div class="header__section" sec:authorize="!isAuthenticated()">
             <div class="header__item headerButton">
-                <a href="#">Войти</a>
+                <a th:href="@{/login}">Войти</a>
+            </div>
+        </div>
+        <div class="header__section" sec:authorize="isAuthenticated()">
+            <div>
+                <a th:href="@{/profile}">
+                    <span sec:authentication="principal.username"></span>
+                </a>
+            </div>
+            <div class="header__item headerButton">
+                <a th:href="@{/logout}">Выйти</a>
             </div>
         </div>
     </div>

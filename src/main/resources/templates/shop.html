@@ -12,26 +12,6 @@
 <div th:insert="~{fragments/menu :: #nav-menu}"></div>
 
 <hr>
-    <td sec:authorize="isAuthenticated()">
-        <h3>
-            Имя пользователя:
-            <span sec:authentication="principal.username">Bill</span>
-        </h3>
-        <form th:action="@{/logout}" th:method="post">
-            <input type="submit" value="Выйти">
-        </form>
-    </td>
-
-    <td sec:authorize="hasAuthority('ROLE_ADMIN')">
-        <a th:href="@{/admin}">Панель администратора</a>
-    </td>
-
-    <td sec:authorize="!isAuthenticated()">
-        <a th:href="@{/login}">Войти</a><br>
-    </td>
-
-<br>
-<hr>
 
 <h4>Товары со всей России</h4>
 <form th:action="@{/}" th:method="get">

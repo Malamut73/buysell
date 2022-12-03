@@ -26,7 +26,7 @@ public class ProductController {
     @GetMapping("/")
     public String products(@RequestParam(name = "title", required = false) String title, Model model, Principal principal){
         model.addAttribute("products", productService.listProducts(title));
-        return "products";
+        return "index";
     }
 
     @GetMapping("/product/{id}")
