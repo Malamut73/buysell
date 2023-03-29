@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
+
+#ssh-copy-id root@79.133.183.207 установка ключа
+
 mvn clean package
 
 echo 'Copy files...'
+
+scp ~/kkt.jar root@79.133.183.207:/home
+
 
 scp -i ~/.ssh/id_rsa \
     target/buysell-0.0.1-SNAPSHOT.jar \
